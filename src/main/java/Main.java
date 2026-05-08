@@ -10,6 +10,30 @@ public class Main {
 
         System.out.println();
 
+        room1.checkIn();
+        System.out.println("After check in:");
+        System.out.println("Room occupied: " + room1.isOccupied());
+        System.out.println("Room dirty: " + room1.isDirty());
+        System.out.println("Room available: " + room1.isAvailable());
+
+        System.out.println();
+
+        room1.checkOut();
+        System.out.println("After check out:");
+        System.out.println("Room occupied: " + room1.isOccupied());
+        System.out.println("Room dirty: " + room1.isDirty());
+        System.out.println("Room available: " + room1.isAvailable());
+
+        System.out.println();
+
+        room1.cleanRoom();
+        System.out.println("After cleaning:");
+        System.out.println("Room occupied: " + room1.isOccupied());
+        System.out.println("Room dirty: " + room1.isDirty());
+        System.out.println("Room available: " + room1.isAvailable());
+
+        System.out.println();
+
         Reservation reservation1 = new Reservation("king", 3, true);
         System.out.println("Room type: " + reservation1.getRoomType());
         System.out.println("Price per night: $" + reservation1.getPrice());
@@ -18,7 +42,22 @@ public class Main {
 
         System.out.println();
 
-        Employee employee1 = new Employee(101, "Omor", "Front Desk", 20.00, 45);
+        Employee employee1 = new Employee(101, "Omor", "Front Desk", 20.00);
+        // Monday
+        employee1.punchTimeCard(9, 17);   // 8 hours
+
+// Tuesday
+        employee1.punchTimeCard(10, 18);  // 8 hours
+
+// Wednesday
+        employee1.punchTimeCard(14, 22);  // 8 hours
+
+// Thursday overnight
+        employee1.punchTimeCard(22, 7);   // 9 hours
+
+// Friday
+        employee1.punchTimeCard(9, 17);   // 8 hours
+
         System.out.println("Employee name: " + employee1.getName());
         System.out.println("Department: " + employee1.getDepartment());
         System.out.println("Regular hours: " + employee1.getRegularHours());

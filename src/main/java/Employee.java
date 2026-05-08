@@ -5,12 +5,36 @@ public class Employee {
     private double payRate;
     private double hoursWorked;
 
-    public Employee(int employeeId, String name, String department, double payRate, double hoursWorked) {
+
+    public Employee(int employeeId, String name, String department, double payRate) {
         this.employeeId = employeeId;
         this.name = name;
         this.department = department;
         this.payRate = payRate;
-        this.hoursWorked = hoursWorked;
+        this.hoursWorked = 0;
+
+    }
+
+    public void punchTimeCard(int timeIn, int timeOut){
+        int shiftHours;
+        if (timeIn < 0 || timeIn > 23 || timeOut < 0 || timeOut > 23) {
+            System.out.println("Invalid time. Please enter 0 - 23.");
+            return;
+        }
+
+
+        if(timeIn<timeOut)
+        {
+            shiftHours=timeOut-timeIn;
+        }
+        else if(timeIn>timeOut){
+            shiftHours=(24-timeIn)+timeOut;
+        }
+        else {
+            shiftHours=0;
+        }
+
+        hoursWorked += shiftHours;
     }
 
     public int getEmployeeId() {
