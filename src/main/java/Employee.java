@@ -1,10 +1,12 @@
+import java.time.LocalDateTime;
+
 public class Employee {
     private int employeeId;
     private String name;
     private String department;
     private double payRate;
     private double hoursWorked;
-
+    private int punchInTime;
 
     public Employee(int employeeId, String name, String department, double payRate) {
         this.employeeId = employeeId;
@@ -12,29 +14,41 @@ public class Employee {
         this.department = department;
         this.payRate = payRate;
         this.hoursWorked = 0;
-
     }
 
-    public void punchTimeCard(int timeIn, int timeOut){
+    public void punchIn(int time) {
+        punchInTime = time;
+    }
+
+    public void punchIn() {
+        LocalDateTime now = LocalDateTime.now();
+        punchInTime = now.getHour();
+    }
+
+    public void punchOut(int time) {
         int shiftHours;
-        if (timeIn < 0 || timeIn > 23 || timeOut < 0 || timeOut > 23) {
-            System.out.println("Invalid time. Please enter 0 - 23.");
-            return;
-        }
 
-
-        if(timeIn<timeOut)
-        {
-            shiftHours=timeOut-timeIn;
-        }
-        else if(timeIn>timeOut){
-            shiftHours=(24-timeIn)+timeOut;
-        }
-        else {
-            shiftHours=0;
+        if (punchInTime < time) {
+            shiftHours = time - punchInTime;
+        } else if (punchInTime > time) {
+            shiftHours = (24 - punchInTime) + time;
+        } else {
+            shiftHours = 0;
         }
 
         hoursWorked += shiftHours;
+    }
+
+    public void punchOut() {
+        LocalDateTime now = LocalDateTime.now();
+        int timeOut = now.getHour();
+
+        punchOut(timeOut);
+    }
+
+    public void punchTimeCard(int timeIn, int timeOut) {
+        punchIn(timeIn);
+        punchOut(timeOut);
     }
 
     public int getEmployeeId() {
