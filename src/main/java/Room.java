@@ -46,6 +46,10 @@ public class Room {
     }
 
     public void cleanRoom() {
+        if (occupied) {
+            return;
+        }
+
         dirty = false;
     }
 }
